@@ -1,0 +1,23 @@
+<apex:page controller="LoginPages" showHeader="false" sidebar="false" >
+ <apex:composition template="{!$Site.Template}">
+ <apex:define name="body">
+<apex:form >
+  <h1 style="text-align:center;font-size:24px;padding:20px 0px 40px 0px;"><b>Login Page</b><br /></h1>
+ <apex:pageBlock >
+  <apex:pageBlockSection >
+    
+    <apex:inputText label="UserName" value="{!userName}" required="true" id="username" styleClass="form-control" />
+    <apex:inputSecret label="Password" value="{!Password}"  required="true" id="password" styleClass="form-control" />
+     </apex:pageBlockSection>
+    <apex:pageBlockButtons >
+    <apex:commandButton value="Login" styleClass="btn btn-success btn-sm" action="{!LoginPage}" />
+     <apex:commandButton value="ClearButton" onclick="this.form.reset();return false;" />
+      </apex:pageBlockButtons>
+     <apex:pageMessages id="Error"></apex:pageMessages>
+      
+   </apex:pageBlock>
+  
+    </apex:form>
+    </apex:define>
+      </apex:composition>
+</apex:page>
