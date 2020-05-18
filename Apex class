@@ -18,7 +18,7 @@ public class LoginPages {
             TeamMemberRecordId = Team.Id;
             //system.debug('@@@@@TeamMemberRecordId', +TeamMemberRecordId);
             system.debug(Team.Id);
-             PageReference pr = new PageReference ('/apex/VisualForcePageWithLightning?id='+Team.Id);
+             PageReference pr = new PageReference (baseUrl='+Team.Id);
                      pr.setReDirect(True);
                      system.debug('@@@@pr'+pr);
                        return pr;
