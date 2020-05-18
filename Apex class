@@ -1,0 +1,52 @@
+public class LoginPages { 
+
+    public String  UserName{get;set;}
+    public String Password{get;set;}
+    public String TeamMemberRecordId {get;set;}
+    public List<Team_Member_Profile__c> returns {get;set;}
+    public LoginPages(){
+        returns =new List<Team_Member_Profile__c>();
+    }
+    public PageReference LoginPage (){
+     
+    String baseUrl = System.URL.getSalesforceBaseUrl().toExternalForm();
+     Team_Member_Profile__c Team =new Team_Member_Profile__c ();
+     Team = [select ID,UserName__c, LastLoginId__c, Password__c from Team_Member_Profile__c Where UserName__c=:UserName];
+        
+    
+        if(UserName ==Team.UserName__c && Password== Team.Password__c){
+            TeamMemberRecordId = Team.Id;
+            //system.debug('@@@@@TeamMemberRecordId', +TeamMemberRecordId);
+            system.debug(Team.Id);
+             PageReference pr = new PageReference ('/apex/VisualForcePageWithLightning?id='+Team.Id);
+                     pr.setReDirect(True);
+                     system.debug('@@@@pr'+pr);
+                       return pr;
+                     // Pagereference pr = new PageReference(baseUrl+'/'+Team.Id);
+
+        }
+  
+         
+         else if (UserName != Team.UserName__c   &&  Password== Team.Password__c   ){
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Plz Enter valid UserName'));
+            return null;
+        }
+        
+        else if (UserName != Team.UserName__c   &&  Password== Team.Password__c   ){
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Plz Enter valid UserName'));
+            return null;
+
+        }
+        else if ( Password != Team.Password__c  &&  UserName == Team.UserName__c   ){
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Plz Enter Valid Password'));
+            return null;
+        }
+        
+        else {
+                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Please Enter Valid UserName and Password'));
+                return null;
+        }
+       
+        
+    }
+    }
